@@ -55,12 +55,19 @@ const PlannerProvider = ({ children }) => {
     return entries.find((note) => note.id === Number(id));
   };
 
+  const deleteEntry = async (id) => {
+    const entry = await getEntry(id);
+    dispatch({ type: 'delete', payload: { id } });
+    return entry;
+  }
+
   return (
     <PlannerContext.Provider
       value={{
         entries,
         addEntry,
         getEntry,
+        deleteEntry,
       }}
     >
       {children}
